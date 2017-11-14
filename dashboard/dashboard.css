@@ -1,0 +1,40 @@
+:root {
+    --app_color: #01508D;
+    --accent_color: #F9C61B;
+}
+
+body {
+    background-color: var(--app_color);
+}
+
+.header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 80px;
+    background-color: var(--accent_color);
+}
+
+.item {
+    color: white;
+    font-size: 18px;
+    margin-left: 20%;
+}
+
+.ui {
+    position: fixed;
+    right: 0;
+}
+
+#navItem{
+    margin-right: 2%;
+}
+
+#header{
+    vertical-align: middle;
+    text-align: left;
+    position: fixed;
+    line-height: 80px;
+    margin-left: 3%;
+}
