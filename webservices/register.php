@@ -20,6 +20,8 @@ if (!empty($fullname) && !empty($email)) {
         $result = $db->requestNewFaculty($fullname,$email);
 
         if($result!=false){
+            // Send email to user regarding activation of Account
+           // $db->sendEmailToFaculty($result);
             $response = array('status'=>true,'response'=>$result);
         }else{
             $response = array('status'=>false,'message'=>'Something went wrong!');
@@ -30,6 +32,8 @@ if (!empty($fullname) && !empty($email)) {
 }else{
     $response = array('status'=>false,'message'=>'Fullname or Email address cannot be empty!');
 }
+
+
 
 echo json_encode($response);
 

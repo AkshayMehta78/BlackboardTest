@@ -5,6 +5,12 @@
  * Date: 11/13/2017
  * Time: 2:03 AM
  */
+
+require_once 'Dashboard_Function.php';
+
+$dashboard = new Dashboard_Function();
+
+$facultyMembers = $dashboard->fetchAllFacultyMembers();
 ?>
 
 
@@ -31,6 +37,7 @@
 
 <body>
 
+<div class="main_div">
 <div class="header">
     <h1 id = "header" class="ui header">Welcome</h1>
 
@@ -41,10 +48,53 @@
         <a class="item">
             Profile
         </a>
-        <a class="item">
+        <a id="nav_logout" class="item">
             Logout
         </a>
     </div>
+</div>
+
+
+
+
+<div class="main_table">
+
+    <table class="ui celled table">
+        <thead>
+        <tr class='center aligned'>
+            <th>Name</th>
+            <th>Email</th>
+            <th>IsActive</th>
+            <th>CreatedAt</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+            for($i=0;$i<sizeof($facultyMembers);$i++)
+            {
+                echo "<tr class='center aligned' ><td>".$facultyMembers[$i]['name']."</td>";
+                echo "<td>".$facultyMembers[$i]['email']."</td>";
+                if($facultyMembers[$i]['isActive'] == 0) {
+                    echo "<td> No </td>";
+                }else{
+                    echo "<td> Yes </td>";
+                }
+                echo "<td>".$facultyMembers[$i]['createdAt']."</td>";
+                if($facultyMembers[$i]['isActive'] == 0){
+                    echo "<td class='center aligned'><button class=\"ui labeled icon button\"><i class=\"check icon\"></i>Activate</button>";
+                }else{
+                    echo "<td class='center aligned'><button class=\"ui labeled icon button\"><i class=\"check icon\"></i>Deactivate</button>";
+                }
+                echo "&nbsp;&nbsp;&nbsp;&nbsp;<button class=\"ui labeled icon button\"><i class=\"delete icon\"></i>Delete</button>";
+                echo "&nbsp;&nbsp;&nbsp;&nbsp;<button class=\"ui labeled icon button\"><i class=\"User icon\"></i>View Profile</button></td></tr>";
+            }
+        ?>
+        </tbody>
+    </table>
+
+</div>
+
 </div>
 
 

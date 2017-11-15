@@ -4,11 +4,11 @@
 }
 
 body {
-    background-color: var(--app_color);
+    /*background-color: var(--app_color);*/
 }
 
 .header {
-    position: fixed;
+    position: relative;
     left: 0;
     top: 0;
     width: 100%;
@@ -37,4 +37,16 @@ body {
     position: fixed;
     line-height: 80px;
     margin-left: 3%;
+}
+
+
+
+.ui.table{
+    border-radius:0;
+    margin: 50px auto;
+}
+
+.ui.button{
+    background-color: var(--app_color);
+    color: white;
 }

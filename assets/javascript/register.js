@@ -18,7 +18,7 @@ $(document).ready(function(){
             success: function (response, status, xhr) {
                     if(response!=null && response!=undefined ){
                         var json = $.parseJSON(response);
-                        alert(json['status']);
+                        redirectToHome();
                     }
             },
             error: function (xhr, status, error) {
@@ -27,4 +27,9 @@ $(document).ready(function(){
         });
     });
 });
+
+function redirectToHome() {
+    window.location.replace("../BlackboardTest/index.html");
+}
+
 

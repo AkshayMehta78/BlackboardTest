@@ -4,7 +4,6 @@ class DB_Functions {
  
     private $db;
     private $dbConnection;
- 
     //put your code here
     // constructor
     function __construct() {
@@ -24,7 +23,8 @@ class DB_Functions {
      * returns user details
      */
     public function requestNewFaculty($fullname, $email) {
-        $query = "INSERT INTO faculty(name,email,isActive,createdAt,isDeleted) VALUES('$fullname','$email',true,NOW(),false)";
+        $password = $this->randomPassword();
+        $query = "INSERT INTO faculty(name,email,password,isActive,createdAt,isDeleted) VALUES('$fullname','$email','$password',false,NOW(),false)";
         $result = mysqli_query($this->dbConnection,$query);
         // check for successful store
         if ($result) {
@@ -70,6 +70,49 @@ class DB_Functions {
         } else {
             // user not existed
             return false;
+        }
+    }
+
+
+    public function randomPassword() {
+        $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+        $pass = array(); //remember to declare $pass as an array
+        $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+        for ($i = 0; $i < 8; $i++) {
+            $n = rand(0, $alphaLength);
+            $pass[] = $alphabet[$n];
+        }
+        return implode($pass); //turn the array into a string
+    }
+
+    public function sendEmailToFaculty($result){
+        $this->mail->isSMTP();                            // Set mailer to use SMTP
+        $this->mail->Host = 'smtp.gmail.com';             // Specify main and backup SMTP servers
+        $this->mail->SMTPAuth = true;                     // Enable SMTP authentication
+        $this->mail->Username = 'akshaymehta9211@gmail.com';          // SMTP username
+        $this->mail->Password = '@Akshay3244'; // SMTP password
+        $this->mail->SMTPSecure = 'tls';                  // Enable TLS encryption, `ssl` also accepted
+        $this->mail->Port = 587;                          // TCP port to connect to
+
+        $this->mail->setFrom('info@example.com', 'CodexWorld');
+        $this->mail->addReplyTo('info@example.com', 'CodexWorld');
+        $this->mail->addAddress('john@gmail.com');   // Add a recipient
+        $this->mail->addCC('cc@example.com');
+        $this->mail->addBCC('bcc@example.com');
+
+        $this->mail->isHTML(true);  // Set email format to HTML
+
+        $bodyContent = '<h1>How to Send Email using PHP in Localhost by CodexWorld</h1>';
+        $bodyContent .= '<p>This is the HTML email sent from localhost using PHP script by <b>CodexWorld</b></p>';
+
+        $this->mail->Subject = 'Email from Localhost by CodexWorld';
+        $this->mail->Body    = $bodyContent;
+
+        if(!$this->mail->send()) {
+            echo 'Message could not be sent.';
+            echo 'Mailer Error: ' . $this->mail->ErrorInfo;
+        } else {
+            echo 'Message has been sent';
         }
     }
 
