@@ -18,3 +18,25 @@ $(document).ready(function(){
 function redirectToHome() {
     window.location.replace('/BlackboardTest/index.html');
 }
+
+function onStatusClick(userId,status) {
+    var url = "activateFacultyStatus.php";
+    var formData = {
+        'userId' : userId,
+        'status' : status
+    };
+
+    $.ajax({
+        type : 'POST',
+        url : url,
+        data : formData,
+        encode : true,
+        success: function (response, status, xhr) {
+            alert(response);
+            window.location.replace('dashboard.php');
+        },
+        error: function (xhr, status, error) {
+            alert(error);
+        }
+    });
+}

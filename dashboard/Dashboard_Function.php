@@ -34,4 +34,18 @@ class Dashboard_Function
         }
         return $array;
     }
+
+    public function updateFacultyStatus($userId,$status){
+        if($status == 0){
+            $sql = "Update faculty set isActive = 1 where id = $userId";
+        }else{
+            $sql = "Update faculty set isActive = 0 where id = $userId";
+        }
+
+        if (mysqli_query($this->dbConnection, $sql)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

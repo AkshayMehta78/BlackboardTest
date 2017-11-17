@@ -3,6 +3,7 @@ function redirectToHome() {
 }
 
 $(document).ready(function(){
+
     // check user session
     if(localStorage.getItem("user")!=undefined){
         redirectToHome();
@@ -39,7 +40,13 @@ $(document).ready(function(){
                             redirectToHome();
                         }
                     }else{
-                        alert(user['message']);
+                        // alert(user['message']);
+                        $('.mini.modal')
+                            .modal({
+                                blurring: true
+                            })
+                            .modal('show')
+                        ;
                     }
 
                 }

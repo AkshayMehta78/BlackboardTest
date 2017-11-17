@@ -66,7 +66,7 @@ $facultyMembers = $dashboard->fetchAllFacultyMembers();
             <th>Email</th>
             <th>IsActive</th>
             <th>CreatedAt</th>
-            <th>Actions</th>
+            <th colspan="3">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -82,12 +82,12 @@ $facultyMembers = $dashboard->fetchAllFacultyMembers();
                 }
                 echo "<td>".$facultyMembers[$i]['createdAt']."</td>";
                 if($facultyMembers[$i]['isActive'] == 0){
-                    echo "<td class='center aligned'><button class=\"ui labeled icon button\"><i class=\"check icon\"></i>Activate</button>";
+                    echo "<td  onclick='onStatusClick(".$facultyMembers[$i]['id'].",".$facultyMembers[$i]['isActive'].")' class='center aligned'><button id='activate' class=\"ui labeled icon button\"><i class=\"check icon\"></i>Activate</button></td>";
                 }else{
-                    echo "<td class='center aligned'><button class=\"ui labeled icon button\"><i class=\"check icon\"></i>Deactivate</button>";
+                    echo "<td  onclick='onStatusClick(".$facultyMembers[$i]['id'].",".$facultyMembers[$i]['isActive'].")' class='center aligned'><button id='deactivate' class=\"ui labeled icon button\"><i class=\"check icon\"></i>Deactivate</button></td>";
                 }
-                echo "&nbsp;&nbsp;&nbsp;&nbsp;<button class=\"ui labeled icon button\"><i class=\"delete icon\"></i>Delete</button>";
-                echo "&nbsp;&nbsp;&nbsp;&nbsp;<button class=\"ui labeled icon button\"><i class=\"User icon\"></i>View Profile</button></td></tr>";
+                echo "<td>&nbsp;&nbsp;&nbsp;&nbsp;<button class=\"ui labeled icon button\"><i class=\"delete icon\"></i>Delete</button></td>";
+                echo "<td>&nbsp;&nbsp;&nbsp;&nbsp;<button class=\"ui labeled icon button\"><i class=\"User icon\"></i>View Profile</button></td></tr>";
             }
         ?>
         </tbody>

@@ -50,3 +50,8 @@ body {
     background-color: var(--app_color);
     color: white;
 }
+
+#deactivate{
+    background-color: red;
+    color: white;
+}
