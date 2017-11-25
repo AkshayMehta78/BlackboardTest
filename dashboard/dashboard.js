@@ -16,7 +16,7 @@ $(document).ready(function(){
 });
 
 function redirectToHome() {
-    window.location.replace('/BlackboardTest/index.html');
+    window.location.replace('/BlackboardTest/index.php');
 }
 
 function onStatusClick(userId,status) {
