@@ -39,7 +39,7 @@ $facultyMembers = $dashboard->fetchAllFacultyMembers();
 
 <div class="main_div">
 <div class="header">
-    <h1 id = "header" class="ui header">Welcome</h1>
+    <h1 id = "header" class="ui header">Edit Profile</h1>
 
     <div id= "navItem" class="ui secondary  menu">
         <a class="active item">
@@ -59,7 +59,7 @@ $facultyMembers = $dashboard->fetchAllFacultyMembers();
 
 <div class="main_table">
 
-    <table class="ui celled table">
+    <table class="ui very basic collapsing celled table">
         <thead>
         <tr class='center aligned'>
             <th>Name</th>

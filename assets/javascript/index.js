@@ -1,5 +1,12 @@
 function redirectToHome() {
-    window.location = "../BlackboardTest/dashboard/dashboard.php"
+
+    var user = $.parseJSON(localStorage.getItem("user"));
+    if(localStorage.getItem("isAdmin") == true){
+        window.location = "../BlackboardTest/dashboard/dashboard.php"
+    }else{
+        window.location = "../BlackboardTest/faculty/"
+    }
+
 }
 
 $(document).ready(function(){
@@ -37,6 +44,8 @@ $(document).ready(function(){
                         if (typeof(Storage) !== "undefined") {
                             // Store
                             localStorage.setItem("user",  JSON.stringify(user));
+                            localStorage.setItem("isAdmin",  isAdmin);
+
                             redirectToHome();
                         }
                     }else{

@@ -7,7 +7,7 @@
  */
 
 require_once '../webservices/include/DB_Functions.php';
-
+session_start();
 $username = $_POST['username'];
 $password = $_POST['password'];
 $isAdmin = $_POST['isAdmin'];
@@ -19,6 +19,13 @@ $response = array();
 if (!empty($username) && !empty($password)) {
     $result = $db->getLoggedInUser($username,$password,$isAdmin);
     if ($result!=false) {
+        if($isAdmin){
+            $_SESSION["facultyId"] = $result['id'];
+        }else{
+            $_SESSION["adminId"] = $result['id'];
+        }
+        $_SESSION["isAdmin"] = $isAdmin;
+
         $response = array('status'=>true,'response'=>$result);
     }else{
         $response = array('status'=>false,'message'=>'Invalid Credentials!');
