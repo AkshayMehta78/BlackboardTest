@@ -86,4 +86,82 @@ class Faculty_Function
         $array = array('id'=>$stream[0],'name'=>$stream[1]);
         return $array;
     }
+
+    public function fetchAllSchools()
+    {
+        $sql = "SELECT * FROM school";
+        $result = mysqli_query($this->dbConnection, $sql);
+        $array = array();
+        while($row = mysqli_fetch_assoc($result)){
+            $array[] = array('id'=>$row['id'],'name'=>$row['name']);
+        }
+        return $array;
+    }
+
+    public function fetchAllStream()
+    {
+        $sql = "SELECT * FROM stream";
+        $result = mysqli_query($this->dbConnection, $sql);
+        $array = array();
+        while($row = mysqli_fetch_assoc($result)){
+            $array[] = array('id'=>$row['id'],'name'=>$row['name']);
+        }
+        return $array;
+    }
+
+    public function fetchAllCoursesByStream($streamId)
+    {
+        $sql = "SELECT * FROM course where streamId = $streamId";
+        $result = mysqli_query($this->dbConnection, $sql);
+        $array = array();
+        while($row = mysqli_fetch_assoc($result)){
+            $array[] = array('id'=>$row['id'],'name'=>$row['name']);
+        }
+        if(sizeof($array>0)){
+            return $array;
+        }else{
+            return false;
+        }
+
+    }
+
+    public function saveFacultSchool($schoolId, $streamId, $courseId, $facultyId)
+    {
+        $isSchoolStreamAdded = $this->checkIfSchoolAndStreamIsAdded($facultyId,$schoolId, $streamId);
+        if($isSchoolStreamAdded){
+            $courses = $isSchoolStreamAdded.','.$courseId;
+            $sql = "UPDATE facultyschool SET courses='$courses' where facultyId = $facultyId and schoolId = $schoolId and streamId = $streamId";
+        }else{
+            $sql = "INSERT INTO facultyschool (facultyId, schoolId, streamId,courses)
+                VALUES ($facultyId,$schoolId,$streamId,$courseId)";
+        }
+        $result = mysqli_query($this->dbConnection, $sql);
+        return $result;
+    }
+
+    private function checkIfSchoolAndStreamIsAdded($facultyId, $schoolId, $streamId)
+    {
+        $sql = "SELECT * FROM facultySchool where facultyId = $facultyId and schoolId = $schoolId and streamId = $streamId";
+        $result = mysqli_query($this->dbConnection, $sql);
+        $no_of_rows = mysqli_num_rows($result);
+        if($no_of_rows > 0){
+            $row = mysqli_fetch_row($result);
+            $course = $row[4];
+            return $course;
+        }else{
+            return false;
+        }
+    }
+
+    public function checkIfCourseIsAdded($schoolId, $streamId, $courseId, $facultyId)
+    {
+        $sql = "SELECT * FROM facultySchool where facultyId = $facultyId and schoolId = $schoolId and streamId = $streamId and courses like '%$courseId%'";
+        $result = mysqli_query($this->dbConnection, $sql);
+        $no_of_rows = mysqli_num_rows($result);
+        if($no_of_rows > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

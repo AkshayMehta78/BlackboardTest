@@ -48,7 +48,7 @@ $facultyMembers = $dashboard->fetchAllFacultyMembers();
         <a class="item">
             Profile
         </a>
-        <a id="nav_logout" class="item">
+        <a href="../webservices/include/logout.php"  id="nav_logout" class="item">
             Logout
         </a>
     </div>
@@ -59,7 +59,7 @@ $facultyMembers = $dashboard->fetchAllFacultyMembers();
 
 <div class="main_table">
 
-    <table class="ui very basic collapsing celled table">
+    <table class="ui celled table">
         <thead>
         <tr class='center aligned'>
             <th>Name</th>

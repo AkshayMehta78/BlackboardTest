@@ -8,13 +8,19 @@
 
 
 require_once 'Faculty_Function.php';
+require_once '../webservices/include/User.php';
+
 session_start();
 
 
 $faculty = new Faculty_Function();
-$facultyId = $_SESSION['facultyId'];
 
-$facultySchools = $faculty->fetchFacultySchoolDetails($facultyId);
+if(isset($_SESSION['user'])) {
+    $user = $_SESSION['user'];
+    $facultyId =  $user->id;
+    $facultySchools = $faculty->fetchFacultySchoolDetails($facultyId);
+}
+
 ?>
 
 <html>
@@ -32,6 +38,7 @@ $facultySchools = $faculty->fetchFacultySchoolDetails($facultyId);
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="faculty.css">
+    <script type="text/javascript" src="faculty.js"></script>
 
 </head>
 
@@ -41,14 +48,14 @@ $facultySchools = $faculty->fetchFacultySchoolDetails($facultyId);
     <div class="header">
         <h1 id = "header" class="ui header">Welcome</h1>
 
-        <div id= "navItem" class="ui secondary  menu">
-            <a class=" item">
+        <div  id= "navItem" class="ui secondary  menu">
+            <a href="../faculty/index.php" class=" item">
                 Home
             </a>
             <a class="active item">
                 Profile
             </a>
-            <a id="nav_logout" class="item">
+            <a href="../webservices/include/logout.php" id="nav_logout" class="item">
                 Logout
             </a>
         </div>

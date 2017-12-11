@@ -1,20 +1,8 @@
 function redirectToHome() {
-
-    var user = $.parseJSON(localStorage.getItem("user"));
-    if(localStorage.getItem("isAdmin") == true){
-        window.location = "../BlackboardTest/dashboard/dashboard.php"
-    }else{
-        window.location = "../BlackboardTest/faculty/"
-    }
-
+    window.location = "../BlackboardTest/index.php"
 }
 
 $(document).ready(function(){
-
-    // check user session
-    if(localStorage.getItem("user")!=undefined){
-        redirectToHome();
-    }
 
     $("#btn_register").click(function () {
         window.location.href = "register.html";
@@ -42,10 +30,6 @@ $(document).ready(function(){
                     var user = $.parseJSON(response);
                     if(user['status']){
                         if (typeof(Storage) !== "undefined") {
-                            // Store
-                            localStorage.setItem("user",  JSON.stringify(user));
-                            localStorage.setItem("isAdmin",  isAdmin);
-
                             redirectToHome();
                         }
                     }else{

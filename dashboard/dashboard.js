@@ -2,9 +2,7 @@ $(document).ready(function(){
 
     var user = $.parseJSON(localStorage.getItem("user"));
 
-    if(user==null || user == undefined){
-        redirectToHome();
-    }
+
     var response = user['response'];
 
     $("#header").text("Welcome, "+response['name']);
@@ -15,9 +13,7 @@ $(document).ready(function(){
     });
 });
 
-function redirectToHome() {
-    window.location.replace('/BlackboardTest/index.php');
-}
+
 
 function onStatusClick(userId,status) {
     var url = "activateFacultyStatus.php";

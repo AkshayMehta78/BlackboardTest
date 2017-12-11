@@ -1,5 +1,19 @@
 <?php
+require_once 'webservices/include/User.php';
+//require_once 'webservices/include/clearAllSessions.php';
 session_start();
+
+if(isset($_SESSION['user'])){
+    $user = $_SESSION['user'];
+    echo $user->isAdmin."----------";
+    if($user->isAdmin == "true"){
+        header('Location: ../BlackboardTest/dashboard/dashboard.php', true, 302);
+    }else{
+        header('Location: ../BlackboardTest/faculty/', true, 302);
+    }
+
+}
+
 ?>
 <html>
 

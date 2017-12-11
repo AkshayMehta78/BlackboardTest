@@ -14,6 +14,7 @@ body {
     height: 80px;
     background-color: var(--accent_color);
     display:inline-block;
+    text-align: center;
 }
 
 
@@ -75,3 +76,19 @@ body {
 
 
 
+/*addSchool.php*/
+
+.card{
+    margin: 5% 5% 5% 5%;
+    text-align: center;
+    width: 50%;
+    left: 20%;
+}
+
+.custom-select{
+    width: 500px;
+}
+.btn.btn-primary{
+    width: 500px;
+    background-color: var(--app_color);
+}
